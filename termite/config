@@ -38,7 +38,7 @@ scrollback_lines = 10000
 #size_hints = false
 
 # "off", "left" or "right"
-#scrollbar = off
+scrollbar = off
 
 # Dracula theme for termite
 # https://github.com/dracula/termite
@@ -51,7 +51,7 @@ scrollback_lines = 10000
 foreground      = #f8f8f2
 foreground_bold = #f8f8f2
 cursor          = #f8f8f2
-background      = rgba(40, 42, 54, 1)
+background      = rgba(00, 00, 00, 1)
 
 # black
 color0  = #000000
@@ -88,15 +88,16 @@ color15 = #e6e6e6
 # 20% background transparency (requires a compositor)
 background = rgba(63, 63, 63, 0.8)
 
+background = rgba(00, 00, 00, 0.8)
 [hints]
 #font = Monospace 12
 #foreground = #dcdccc
 #background = #3f3f3f
 #active_foreground = #e68080
 #active_background = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
+padding = 2
+border = #3f3f3f
+border_width = 1
 #roundness = 2.0
 
 # vim: ft=dosini cms=#%s

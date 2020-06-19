@@ -8,12 +8,17 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+local lain = require("lain")
+local freedesktop = require("freedesktop")
+local my_table = awful.util.table or gears.table
+local dpi = require("beautiful.xresources").apply_dpi
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+--local chosen_theme = themes[5]
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -31,7 +36,7 @@ end
 do
     local in_error = false
     awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
+        -- Make sure we don't go 
         if in_error then return end
         in_error = true
 
@@ -45,7 +50,10 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+--beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
+local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "zenburn") beautiful.init(theme_path)
+
+--beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
@@ -61,9 +69,9 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+    awful.layout.suit.tile.left,
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
@@ -169,7 +177,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -192,29 +200,52 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+        style = {
+          shape = gears.shape.powerline,
+        },
+        buttons = tasklist_buttons,
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
-
+   -- s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.bg_normal .. "55" })
+      s.mywibox = awful.wibar({ position = "top", screen = s, type = 'dock', bg = '#00000000', fg = '#ffffff', })
     -- Add widgets to the wibox
+    
+    -- Splitters
+    
+    pipesymbol = wibox.widget.textbox()
+    pipesymbol:set_text(" | ")
+
+    double_space = wibox.widget.textbox()
+    double_space:set_text(" ")
+    
+
     s.mywibox:setup {
+	  -- {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
+            double_space,
             mylauncher,
+            pipesymbol,
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+--        s.mytasklist, -- Middle widget
+            nill,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            pipesymbol,
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
         },
+   -- },
+  --  bottom = 2,
+   -- color = "#d3d3d3",
+   -- widget = wibox.container.margin,
     }
 end)
 -- }}}
@@ -311,8 +342,9 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey },            "r",     function ()
+	    awful.util.spawn("dmenu_run -l 5")  end,
+              {description = "run dmenu", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -490,12 +522,17 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+   --- Set Firefox to always map on the tag named "2" on screen 1.
+    { rule = 
+   { class = "Firefox" },
+      properties = { 
+    -- tag = "Browser",
+     border_color_normal = "#FFCE1C"
+   }, 
+ },
 }
 -- }}}
 
@@ -554,16 +591,72 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+-- Tag specific applications
+local ruled = require('ruled')
+
+ruled.client.append_rule {
+	rule_any = {
+		class = {'feh'}
+	},
+	properties = {
+		tag = 'Misc',
+	},
+}
+
+-- Border colour 
+
+--ruled.client.append_rule {
+--	rule_any = {
+--		class = {'termite'}
+--	},
+--	properties = {
+--		border_color = beautiful.border_normal,
+--	},
+--}
+
+
+--awful.rules.rules = {
+    -- All clients will match this rule.
+ --   id       = "global",  
+  --  rule = { 
+	--	class = {'termite'}
+   -- },
+    --  properties = { 
+	   --   border_width = beautiful.border_width,
+      --        border_color = beautiful.border_normal,
+	--	},
+--}
+-- Gaps
+
+beautiful.useless_gap = 8
+
 -- Autostart applications
 awful.spawn.with_shell('xrandr -s 1920x1200')
 awful.spawn.with_shell('nitrogen --restore')
-awful.spawn.with_shell('compton')
+awful.spawn.with_shell('/home/darkeve/.config/compton/compton -i 0.9')
+
+
+local colours = {}
+
+colours.bw_0 = "#00ff0000"
+colours.bw_1 = "#ff000000"
+colours.bw_3 = "#ffffff00"
+--beautiful.tasklist_disable_task_name = true
+beautiful.wibar_bg_focus = colours.bw_1
+beautiful.taglist_fg_focus = colours.bw_0 -- Current tag colour
+beautiful.taglist_bg_focus = colours.bw_0
+beautiful.taglist_fg_urgent = colours.bw_3
+beautiful.taglist_bg_urgent = colours.bw_1
+beautiful.taglist_fg_minimize = colours.bw_2
+beautiful.taglist_bg_minimize = colours.bw_1
+
+
+
+
+
+

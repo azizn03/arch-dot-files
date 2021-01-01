@@ -1,0 +1,9 @@
+[2020-12-27 15:08:25.070] [renderer1] [error] Error: Unable to read file '/home/darkeve/code/script.sh' (Error: Unable to resolve non-existing file '/home/darkeve/code/script.sh')
+    at Object.t.createErrorWithActions (file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:56:9)
+    at w.handleSetInputError (file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:6210:391)
+    at w.handleSetInputError (file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:6213:52)
+    at w.setInput (file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:6210:98)
+    at async p.doSetInput (file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:4775:840)
+    at async p.openEditor (file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:4774:425)
+    at async file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:6797:739
+    at async e.restoreEditors (file:///usr/lib/code/out/vs/workbench/workbench.desktop.main.js:6790:903)

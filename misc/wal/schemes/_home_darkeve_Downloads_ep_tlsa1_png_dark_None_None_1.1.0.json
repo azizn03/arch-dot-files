@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/darkeve/Downloads/ep/tlsa1.png",
+    "alpha": "100",
+    "special": {
+        "background": "#110d22",
+        "foreground": "#e0edf5",
+        "cursor": "#e0edf5"
+    },
+    "colors": {
+        "color0": "#110d22",
+        "color1": "#2DB3C2",
+        "color2": "#8AA4B5",
+        "color3": "#ACCEAC",
+        "color4": "#98B5CC",
+        "color5": "#AAC7DA",
+        "color6": "#B4D1EA",
+        "color7": "#e0edf5",
+        "color8": "#9ca5ab",
+        "color9": "#2DB3C2",
+        "color10": "#8AA4B5",
+        "color11": "#ACCEAC",
+        "color12": "#98B5CC",
+        "color13": "#AAC7DA",
+        "color14": "#B4D1EA",
+        "color15": "#e0edf5"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/darkeve/Desktop/green.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#131510",
+        "foreground": "#e2e5c7",
+        "cursor": "#e2e5c7"
+    },
+    "colors": {
+        "color0": "#131510",
+        "color1": "#98A261",
+        "color2": "#BEC466",
+        "color3": "#657A82",
+        "color4": "#728E9A",
+        "color5": "#9AA5A3",
+        "color6": "#B0C2B9",
+        "color7": "#e2e5c7",
+        "color8": "#9ea08b",
+        "color9": "#98A261",
+        "color10": "#BEC466",
+        "color11": "#657A82",
+        "color12": "#728E9A",
+        "color13": "#9AA5A3",
+        "color14": "#B0C2B9",
+        "color15": "#e2e5c7"
+    }
+}

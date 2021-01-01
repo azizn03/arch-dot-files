@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/darkeve/Downloads/space.png",
+    "alpha": "100",
+    "special": {
+        "background": "#000000",
+        "foreground": "#c0c0c0",
+        "cursor": "#c0c0c0"
+    },
+    "colors": {
+        "color0": "#000000",
+        "color1": "#2C2C2C",
+        "color2": "#333333",
+        "color3": "#3C3C3C",
+        "color4": "#454545",
+        "color5": "#555555",
+        "color6": "#707070",
+        "color7": "#c0c0c0",
+        "color8": "#868686",
+        "color9": "#2C2C2C",
+        "color10": "#333333",
+        "color11": "#3C3C3C",
+        "color12": "#454545",
+        "color13": "#555555",
+        "color14": "#707070",
+        "color15": "#c0c0c0"
+    }
+}

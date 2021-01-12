@@ -1,9 +1,0 @@
-{
-    "window.zoomLevel": 1,
-    "editor.fontSize": 18,
-    "workbench.colorTheme": "Visual Studio Dark",
-    "workbench.preferredHighContrastColorTheme": "Visual Studio Dark",
-    "workbench.preferredLightColorTheme": "Default Dark+",
-    "editor.renderWhitespace": "all",
-    "editor.minimap.enabled": false
-}

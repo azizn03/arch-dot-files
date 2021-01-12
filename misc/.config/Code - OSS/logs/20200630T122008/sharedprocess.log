@@ -1,9 +1,0 @@
-[2020-06-30 12:20:14.396] [sharedprocess] [info] main {"machineId":"5740d389c315509ec174b61c000dca194ffff6ae439a6e8190b67747a344533b","windowId":2}
-[2020-06-30 12:20:14.434] [sharedprocess] [error] [File Watcher (node.js)] Error: ENOENT: no such file or directory, stat '/home/darkeve/.config/Code - OSS/User/snippets'
-[2020-06-30 12:20:54.426] [sharedprocess] [info] Starting to clean up unused language packs.
-[2020-06-30 19:15:11.817] [sharedprocess] [info] Installing extension: shakram02.bash-beautify
-[2020-06-30 19:15:12.362] [sharedprocess] [info] Downloaded extension: shakram02.bash-beautify /tmp/55f403cb-721c-44d9-a153-921fe0da2800
-[2020-06-30 19:15:13.756] [sharedprocess] [info] Extracted extension to /home/darkeve/.vscode-oss/extensions/.shakram02.bash-beautify-0.1.1: shakram02.bash-beautify
-[2020-06-30 19:15:13.763] [sharedprocess] [info] Renamed to /home/darkeve/.vscode-oss/extensions/shakram02.bash-beautify-0.1.1
-[2020-06-30 19:15:13.764] [sharedprocess] [info] Installation completed. shakram02.bash-beautify
-[2020-06-30 19:15:13.768] [sharedprocess] [info] Extensions installed successfully: shakram02.bash-beautify

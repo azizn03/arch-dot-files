@@ -12,6 +12,8 @@ local lain = require("lain")
 local freedesktop = require("freedesktop")
 local my_table = awful.util.table or gears.table
 local dpi = require("beautiful.xresources").apply_dpi
+local brightness_widget = require("awesome-vm-widgets.brightness-widget.brightness")
+--local volumebar_widget = require("awesome-wm-widgets.volumebar-widget.volumebar")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
@@ -69,19 +71,20 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+    awful.layout.suit.tile.right,
     awful.layout.suit.tile.left,
-    awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.floatin,
+    -- awful.layout.suit.tile,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -208,7 +211,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-   -- s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.bg_normal .. "55" })
+  --  s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.bg_normal .. "55" })
       s.mywibox = awful.wibar({ position = "top", screen = s, type = 'dock', bg = '#00000000', fg = '#ffffff', })
     -- Add widgets to the wibox
     
@@ -238,6 +241,13 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             pipesymbol,
             mykeyboardlayout,
+	    pipesymbol,
+	    require("battery-widget") {},
+	    pipesymbol,
+      brightness_widget(),
+      pipesymbol,
+      --volumebar_widget(),
+      pipesymbol,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -343,8 +353,32 @@ globalkeys = gears.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function ()
-	    awful.util.spawn("dmenu_run -x 240 -y 2 -w 1680 -h 35")  end,
+       awful.util.spawn('dmenu_run -fn "JetBrains Mono Regular 22" -x 160 -y 0 -z 1770 -h 38')  end,
               {description = "run dmenu", group = "launcher"}),
+    
+    -- function keys
+    
+    awful.key({ }, "XF86AudioMute", function ()
+      awful.util.spawn("amixer set Master toggle") end,
+              {descrption = "Mute Sound", group = "Function Keys"}),
+  
+    awful.key({ }, "XF86AudioLowerVolume", function ()
+      awful.util.spawn("amixer set Master 5%-") end,
+              {descrption = "Lower Volume", group = "Function Keys"}),
+
+    awful.key({ }, "XF86AudioRaiseVolume", function ()
+      awful.util.spawn("amixer set Master 5%+") end,
+              {descrption = "Raise Volume", group = "Function Keys"}),
+
+    awful.key({ }, "XF86MonBrightnessDown", function ()
+      awful.util.spawn("sudo light -U 5") end,
+              {descrption = "Lower Screen Brightness", group = "Function Keys"}),
+
+    awful.key({ }, "XF86MonBrightnessUp", function ()
+      awful.util.spawn("sudo light -A 5") end,
+              {descrption = "Raise Screen Brightness", group = "Function Keys"}),
+
+
 
     awful.key({ modkey }, "x",
               function ()
@@ -637,8 +671,9 @@ beautiful.useless_gap = 8
 
 -- Autostart applications
 awful.spawn.with_shell('xrandr -s 1920x1200')
-awful.spawn.with_shell('nitrogen --restore')
-awful.spawn.with_shell('/home/darkeve/.config/compton/compton -i 0.9')
+awful.spawn.with_shell('picom -b -i 0.9')
+awful.spawn.with_shell('nitrogen --restore &')
+awful.spawn.with_shell('wal -R')
 
 
 local colours = {}

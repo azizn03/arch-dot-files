@@ -6,7 +6,7 @@
 #cell_width_scale = 1.0
 clickable_url = true
 dynamic_title = true
-font = Monospace 13
+font = JetBrains Mono Regular 22
 #fullscreen = true
 #icon_name = terminal
 #mouse_autohide = false
@@ -86,9 +86,9 @@ color7  = #bfbfbf
 color15 = #e6e6e6
 
 # 20% background transparency (requires a compositor)
-background = rgba(63, 63, 63, 0.8)
+background = rgba(63, 63, 63, 0.2)
 
-background = rgba(00, 00, 00, 0.8)
+background = rgba(00, 00, 00, 0.2)
 [hints]
 #font = Monospace 12
 #foreground = #dcdccc
